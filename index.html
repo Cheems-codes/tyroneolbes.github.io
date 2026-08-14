@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0" />
+  <!-- ============================================================
+    ✏️  CUSTOMIZE: Update the title with your name
+  ============================================================ -->
+  <title>Tyrone Olbes — Portfolio</title>
+  <link rel="icon" href="icon3.jpg" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #060608;
+      --surface:   #0f0f13;
+      --border:    rgba(255,255,255,.07);
+      --accent:    #c8ff00;
+      --accent2:   #7b61ff;
+      --text:      #f0ede8;
+      --muted:     rgba(240,237,232,.4);
+      --font-head: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.6;
+      cursor: none;
+      overflow-x: hidden;
+    }
+
+    /* ─── CUSTOM CURSOR ────────────────────────────────────────── */
+    #cursor {
+      width: 12px; height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform .15s ease, width .3s ease, height .3s ease, background .3s ease;
+      mix-blend-mode: difference;
+    }
+    #cursor.expand {
+      width: 52px; height: 52px;
+      background: rgba(200,255,0,.15);
+    }
+    #cursor-ring {
+      width: 40px; height: 40px;
+      border: 1px solid rgba(200,255,0,.4);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: top .08s ease, left .08s ease;
+    }
+
+    /* ─── SCROLLBAR ─────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+    /* ─── NOISE OVERLAY ─────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: .025;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── NAV ───────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 48px;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color .4s, background .4s;
+    }
+    nav.scrolled {
+      border-color: var(--border);
+      background: rgba(6,6,8,.8);
+    }
+
+    /* ============================================================
+       ✏️  CUSTOMIZE: Replace "YN" initials & "Your Name" with yours
+    ============================================================ */
+    .logo {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -.01em;
+      color: var(--text);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .logo-mark {
+      width: 34px; height: 34px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: grid; place-items: center;
+      font-size: .75rem;
+      color: #000;
+      font-weight: 800;
+    }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .85rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      padding: 10px 22px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: .82rem;
+      letter-spacing: .04em;
+      transition: background .2s, border-color .2s;
+    }
+    .nav-cta:hover { background: var(--accent); border-color: var(--accent); color: #000; }
+
+    /* ─── HERO ──────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 48px 80px;
+      position: relative; overflow: hidden;
+    }
+
+    .hero-bg-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+    .hero-bg-blob.b1 {
+      width: 600px; height: 600px;
+      background: rgba(123,97,255,.18);
+      top: -100px; right: -100px;
+      animation: float 8s ease-in-out infinite;
+    }
+    .hero-bg-blob.b2 {
+      width: 400px; height: 400px;
+      background: rgba(200,255,0,.1);
+      bottom: 100px; left: 20%;
+      animation: float 10s ease-in-out infinite reverse;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.04); }
+    }
+
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp .8s .3s forwards;
+    }
+    .hero-eyebrow span {
+      width: 32px; height: 1px; background: var(--accent);
+    }
+    .hero-eyebrow p {
+      font-size: .78rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-title {
+      font-family: var(--font-head);
+      font-size: clamp(3.5rem, 9vw, 9rem);
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: -.03em;
+      opacity: 0;
+      animation: fadeUp .9s .5s forwards;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-sub-row {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-top: 40px;
+      opacity: 0;
+      animation: fadeUp .9s .75s forwards;
+    }
+    /* ============================================================
+       ✏️  CUSTOMIZE: Your short bio / tagline goes here
+    ============================================================ */
+    .hero-bio {
+      max-width: 340px;
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .hero-scroll-hint {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      font-size: .7rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .scroll-line {
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollLine 1.6s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%,100% { transform: scaleY(1) translateY(0); opacity: 1; }
+      50% { transform: scaleY(.5) translateY(12px); opacity: .4; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── MARQUEE STRIP ──────────────────────────────────────────── */
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      background: var(--surface);
+    }
+    .marquee-track {
+      display: flex; gap: 60px; width: max-content;
+      animation: marquee 20s linear infinite;
+    }
+    .marquee-track span {
+      font-family: var(--font-head);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .marquee-track span.accent { color: var(--accent); }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── SECTION SHARED ─────────────────────────────────────────── */
+    section { position: relative; z-index: 1; }
+
+    .section-label {
+      font-size: .72rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::before {
+      content: '';
+      width: 20px; height: 1px; background: var(--accent);
+    }
+
+    /* ─── ABOUT ──────────────────────────────────────────────────── */
+    .about {
+      padding: 120px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-left h2 {
+      font-family: var(--font-head);
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -.025em;
+      margin-bottom: 28px;
+    }
+    .about-left p {
+      color: var(--muted);
+      max-width: 420px;
+      margin-bottom: 16px;
+    }
+
+    .about-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* ============================================================
+       ✏️  CUSTOMIZE: Your skills / expertise tags
+    ============================================================ */
+    .skill-tags {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-top: 28px;
+    }
+    .skill-tag {
+      padding: 8px 18px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: .78rem;
+      letter-spacing: .04em;
+      color: var(--muted);
+      transition: border-color .2s, color .2s;
+    }
+    .skill-tag:hover { border-color: var(--accent); color: var(--accent); }
+
+    .stat-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .stat-cell {
+      background: var(--surface);
+      padding: 32px 28px;
+    }
+    .stat-cell .num {
+      font-family: var(--font-head);
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-cell .label {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* ─── PHOTO CARD ─────────────────────────────────────────────── */
+    /* ============================================================
+       ✏️  CUSTOMIZE: Replace the placeholder below with your photo
+    ============================================================ */
+    .photo-card {
+      width: 100%;
+      aspect-ratio: 3/4;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+    .photo-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%);
+      transition: filter .4s, transform .6s;
+    }
+    .photo-card:hover img { filter: grayscale(0%); transform: scale(1.03); }
+    .photo-card-placeholder {
+      width: 100%; height: 100%;
+      background: var(--surface);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: .85rem;
+      letter-spacing: .04em;
+    }
+    .photo-card-placeholder svg { opacity: .3; }
+
+    /* ─── WORK / PROJECTS ─────────────────────────────────────────── */
+    .work { padding: 80px 48px 120px; }
+    .work-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 60px;
+    }
+    .work-header h2 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -.025em;
+      line-height: 1.05;
+    }
+    .see-all {
+      padding: 12px 26px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: .82rem;
+      letter-spacing: .04em;
+      transition: background .2s, color .2s;
+      white-space: nowrap;
+      align-self: center;
+    }
+    .see-all:hover { background: var(--accent); border-color: var(--accent); color: #000; }
+
+    /* Project grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
+    }
+
+    /* ============================================================
+       ✏️  CUSTOMIZE: Each .project-card below is ONE project.
+           Replace: title, category, year, description, and img src.
+           The grid-column values control card width (wide = 7 cols).
+    ============================================================ */
+    .project-card {
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      cursor: none;
+      transition: border-color .3s;
+      display: flex; flex-direction: column;
+    }
+    .project-card:hover { border-color: rgba(200,255,0,.3); }
+    .project-card:hover .project-img img { transform: scale(1.06); }
+    .project-card:hover .project-arrow { transform: rotate(45deg); }
+
+    .project-card.wide  { grid-column: span 7; }
+    .project-card.narrow{ grid-column: span 5; }
+    .project-card.full  { grid-column: span 12; }
+
+    .project-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: #111;
+      position: relative;
+    }
+    .project-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .6s cubic-bezier(.25,.46,.45,.94);
+      display: block;
+    }
+    .project-img-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 10px;
+      color: var(--muted); font-size: .82rem;
+      background: linear-gradient(135deg, #111 0%, #1a1a22 100%);
+    }
+
+    .project-meta {
+      padding: 28px 28px 24px;
+      display: flex; flex-direction: column; gap: 8px;
+      flex: 1;
+    }
+    .project-tags { display: flex; gap: 8px; margin-bottom: 4px; }
+    .project-tag {
+      font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--accent); padding: 3px 10px;
+      border: 1px solid rgba(200,255,0,.3); border-radius: 100px;
+    }
+    .project-title {
+      font-family: var(--font-head);
+      font-size: 1.35rem; font-weight: 700;
+      letter-spacing: -.015em;
+    }
+    .project-desc { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+    .project-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: auto; padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .project-year { font-size: .75rem; color: var(--muted); letter-spacing: .06em; }
+    .project-arrow {
+      width: 32px; height: 32px;
+      border: 1px solid var(--border); border-radius: 50%;
+      display: grid; place-items: center;
+      transition: transform .3s, border-color .3s, background .3s;
+      font-size: .9rem;
+    }
+    .project-card:hover .project-arrow {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #000;
+    }
+
+    /* ─── SERVICES ──────────────────────────────────────────────── */
+    .services {
+      padding: 80px 48px 120px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .services h2 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -.025em;
+      margin-bottom: 60px;
+    }
+    .services-list { display: flex; flex-direction: column; }
+
+    /* ============================================================
+       ✏️  CUSTOMIZE: Replace service items with what YOU offer
+    ============================================================ */
+    .service-item {
+      display: flex; align-items: center;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      gap: 40px;
+      transition: padding-left .3s;
+      cursor: none;
+    }
+    .service-item:hover { padding-left: 12px; }
+    .service-item:first-child { border-top: 1px solid var(--border); }
+    .service-num {
+      font-family: var(--font-head);
+      font-size: .78rem; font-weight: 700;
+      color: var(--accent);
+      min-width: 40px;
+    }
+    .service-name {
+      font-family: var(--font-head);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -.015em;
+      flex: 1;
+    }
+    .service-desc {
+      max-width: 280px;
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .service-arrow {
+      width: 44px; height: 44px;
+      border: 1px solid var(--border); border-radius: 50%;
+      display: grid; place-items: center;
+      transition: transform .3s, border-color .3s;
+      font-size: 1rem;
+    }
+    .service-item:hover .service-arrow {
+      transform: rotate(45deg);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ─── CONTACT / CTA ─────────────────────────────────────────── */
+    .contact {
+      padding: 120px 48px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .contact-blob {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: rgba(123,97,255,.12);
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      filter: blur(100px);
+      pointer-events: none;
+    }
+    .contact .section-label { justify-content: center; }
+    .contact h2 {
+      font-family: var(--font-head);
+      font-size: clamp(2.8rem, 7vw, 6.5rem);
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: -.03em;
+      margin-bottom: 36px;
+      position: relative;
+    }
+    .contact h2 em { font-style: normal; color: var(--accent); }
+
+    /* ============================================================
+       ✏️  CUSTOMIZE: Replace with your actual email address
+    ============================================================ */
+    .contact-email {
+      display: inline-block;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: .02em;
+      position: relative;
+      transition: color .2s;
+      margin-bottom: 48px;
+    }
+    .contact-email::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 1px; background: var(--accent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .3s;
+    }
+    .contact-email:hover { color: var(--accent); }
+    .contact-email:hover::after { transform: scaleX(1); }
+
+    .social-links {
+      display: flex; gap: 16px; justify-content: center;
+      list-style: none; position: relative;
+    }
+    /* ============================================================
+       ✏️  CUSTOMIZE: Update social links with your own URLs
+    ============================================================ */
+    .social-links a {
+      padding: 12px 24px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .8rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .social-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ─── FOOTER ─────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    footer p { font-size: .78rem; color: var(--muted); }
+    /* ============================================================
+       ✏️  CUSTOMIZE: Update footer name & year
+    ============================================================ */
+
+    /* ─── SCROLL REVEAL ─────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 0 24px 60px; }
+      .about { grid-template-columns: 1fr; padding: 80px 24px; gap: 40px; }
+      .work { padding: 60px 24px 80px; }
+      .project-card.wide, .project-card.narrow, .project-card.full {
+        grid-column: span 12;
+      }
+      .work-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .services { padding: 60px 24px; }
+      .service-desc { display: none; }
+      .contact { padding: 80px 24px; }
+      footer { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ─── NAV ────────────────────────────────────────────────────── -->
+  <nav id="nav">
+    <!-- ✏️ CUSTOMIZE: Update initials and your name -->
+    <a class="logo" href="#">
+      <div class="logo-mark">TO</div>
+      Tyrone Olbes
+    </a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <!-- ✏️ CUSTOMIZE: Update href with your email -->
+    <a class="nav-cta" href="olbeseurico.com">Hire Me</a>
+  </nav>
+
+  <!-- ─── HERO ─────────────────────────────────────────────────────── -->
+  <header class="hero">
+    <div class="hero-bg-blob b1"></div>
+    <div class="hero-bg-blob b2"></div>
+
+    <div class="hero-eyebrow">
+      <span></span>
+      <!-- ✏️ CUSTOMIZE: Your role / specialty -->
+      <p>Creative Developer &amp; Designer</p>
+    </div>
+
+    <!-- ✏️ CUSTOMIZE: Your headline — keep the <em> tag on the word you want highlighted -->
+    <h1 class="hero-title">
+      Crafting<br/>
+      Digital<br/>
+      <em>Experiences.</em>
+    </h1>
+
+    <div class="hero-sub-row">
+      <!-- ✏️ CUSTOMIZE: Your short bio (1–2 sentences) -->
+      <p class="hero-bio">
+        I design and build products that live at the intersection of
+        bold visual craft and precise engineering. Based in Manila, PH.
+      </p>
+      <div class="hero-scroll-hint">
+        <div class="scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── MARQUEE ───────────────────────────────────────────────────── -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track">
+      <!-- ✏️ CUSTOMIZE: Add or remove skills/words in the marquee (duplicate for seamless loop) -->
+      <span>UI Design</span><span class="accent">✦</span>
+      <span>Web Development</span><span class="accent">✦</span>
+      <span>Motion</span><span class="accent">✦</span>
+      <span>Branding</span><span class="accent">✦</span>
+      <span>React</span><span class="accent">✦</span>
+      <span>Figma</span><span class="accent">✦</span>
+      <span>Full-Stack</span><span class="accent">✦</span>
+      <span>Creative Direction</span><span class="accent">✦</span>
+      <!-- duplicate for seamless loop -->
+      <span>UI Design</span><span class="accent">✦</span>
+      <span>Web Development</span><span class="accent">✦</span>
+      <span>Motion</span><span class="accent">✦</span>
+      <span>Branding</span><span class="accent">✦</span>
+      <span>React</span><span class="accent">✦</span>
+      <span>Figma</span><span class="accent">✦</span>
+      <span>Full-Stack</span><span class="accent">✦</span>
+      <span>Creative Direction</span><span class="accent">✦</span>
+    </div>
+  </div>
+
+  <!-- ─── ABOUT ─────────────────────────────────────────────────────── -->
+  <section class="about" id="about">
+    <div class="about-left reveal">
+      <p class="section-label">About Me</p>
+      <!-- ✏️ CUSTOMIZE: Your about heading -->
+      <h2>Design with<br/>Purpose &amp;<br/>Precision</h2>
+      <!-- ✏️ CUSTOMIZE: Your bio paragraphs -->
+      <p>
+        I'm a multidisciplinary designer and developer with 5+ years of experience
+        creating digital products that blend aesthetics with functionality.
+      </p>
+      <p>
+        From early-stage startups to established brands, I help teams ship
+        remarkable experiences across web and mobile.
+      </p>
+      <!-- ✏️ CUSTOMIZE: Your tech stack / skills -->
+      <div class="skill-tags">
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">Next.js</span>
+        <span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">Tailwind</span>
+        <span class="skill-tag">GSAP</span>
+        <span class="skill-tag">Webflow</span>
+      </div>
+    </div>
+
+    <div class="about-right reveal">
+      <!-- ✏️ CUSTOMIZE: Replace placeholder with <img src="your-photo.jpg" alt="Your Name"> -->
+      <div class="photo-card">
+        <img src="me2.JPG" alt="Tyrone Olbes">
+      </div>
+
+      <!-- ✏️ CUSTOMIZE: Update numbers to match your actual stats -->
+      <div class="stat-grid">
+        <div class="stat-cell">
+          <div class="num">2+</div>
+          <div class="label">Years Experience</div>
+        </div>
+        <div class="stat-cell">
+          <div class="num">3</div>
+          <div class="label">Projects Delivered</div>
+        </div>
+        <div class="stat-cell">
+          <div class="num">20+</div>
+          <div class="label">Happy Clients</div>
+        </div>
+        <div class="stat-cell">
+          <div class="num">9</div>
+          <div class="label">Verified Certificates</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WORK / PROJECTS ───────────────────────────────────────────── -->
+  <section class="work" id="work">
+    <div class="work-header reveal">
+      <div>
+        <p class="section-label">Selected Work</p>
+        <h2>Recent<br/>Projects</h2>
+      </div>
+      <a class="see-all" href="#">See All Work ↗</a>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- ================================================================
+           ✏️  PROJECT 1 — WIDE CARD (left side)
+           Replace: title, category tag, year, description, and image src
+      ================================================================ -->
+      <div class="project-card wide reveal">
+        <div class="project-img">
+          <!-- ✏️ Replace src with your project screenshot, e.g. src="project1.jpg" -->
+          <!-- <img src="project1.jpg" alt="Project 1"> -->
+          <div class="project-img-placeholder">
+            <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <span style="font-size:.78rem;letter-spacing:.04em;">Project Screenshot Here</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div class="project-tags">
+            <span class="project-tag">Web Design</span><!-- ✏️ Category -->
+            <span class="project-tag">Development</span>
+          </div>
+          <div class="project-title">Project One Title</div><!-- ✏️ Title -->
+          <div class="project-desc">
+            A brief description of what this project is about, the problem
+            it solves, and your role in making it happen.<!-- ✏️ Description -->
+          </div>
+          <div class="project-footer">
+            <span class="project-year">2024</span><!-- ✏️ Year -->
+            <div class="project-arrow">↗</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           ✏️  PROJECT 2 — NARROW CARD (right side)
+      ================================================================ -->
+      <div class="project-card narrow reveal">
+        <div class="project-img">
+          <!-- <img src="project2.jpg" alt="Project 2"> -->
+          <div class="project-img-placeholder">
+            <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <span style="font-size:.78rem;letter-spacing:.04em;">Project Screenshot Here</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div class="project-tags">
+            <span class="project-tag">Branding</span><!-- ✏️ Category -->
+          </div>
+          <div class="project-title">Project Two Title</div><!-- ✏️ Title -->
+          <div class="project-desc">
+            Short description of the project and your contribution.<!-- ✏️ Description -->
+          </div>
+          <div class="project-footer">
+            <span class="project-year">2024</span><!-- ✏️ Year -->
+            <div class="project-arrow">↗</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           ✏️  PROJECT 3 — NARROW CARD (left side)
+      ================================================================ -->
+      <div class="project-card narrow reveal">
+        <div class="project-img">
+          <!-- <img src="project3.jpg" alt="Project 3"> -->
+          <div class="project-img-placeholder">
+            <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <span style="font-size:.78rem;letter-spacing:.04em;">Project Screenshot Here</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div class="project-tags">
+            <span class="project-tag">Mobile</span><!-- ✏️ Category -->
+            <span class="project-tag">UI/UX</span>
+          </div>
+          <div class="project-title">Project Three Title</div><!-- ✏️ Title -->
+          <div class="project-desc">
+            Short description of the project and your contribution.<!-- ✏️ Description -->
+          </div>
+          <div class="project-footer">
+            <span class="project-year">2023</span><!-- ✏️ Year -->
+            <div class="project-arrow">↗</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           ✏️  PROJECT 4 — WIDE CARD (right side)
+      ================================================================ -->
+      <div class="project-card wide reveal">
+        <div class="project-img">
+          <!-- <img src="project4.jpg" alt="Project 4"> -->
+          <div class="project-img-placeholder">
+            <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <span style="font-size:.78rem;letter-spacing:.04em;">Project Screenshot Here</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div class="project-tags">
+            <span class="project-tag">SaaS</span><!-- ✏️ Category -->
+            <span class="project-tag">Full-Stack</span>
+          </div>
+          <div class="project-title">Project Four Title</div><!-- ✏️ Title -->
+          <div class="project-desc">
+            A brief description of what this project is about, the problem
+            it solves, and your role in making it happen.<!-- ✏️ Description -->
+          </div>
+          <div class="project-footer">
+            <span class="project-year">2023</span><!-- ✏️ Year -->
+            <div class="project-arrow">↗</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           ✏️  PROJECT 5 — FULL-WIDTH CARD (add more projects the same way)
+      ================================================================ -->
+      <div class="project-card full reveal">
+        <div class="project-img" style="aspect-ratio:21/7">
+          <!-- <img src="project5.jpg" alt="Project 5"> -->
+          <div class="project-img-placeholder">
+            <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <span style="font-size:.78rem;letter-spacing:.04em;">Project Screenshot Here (Wide Banner)</span>
+          </div>
+        </div>
+        <div class="project-meta" style="flex-direction:row;align-items:center;flex-wrap:wrap;gap:20px">
+          <div style="flex:1">
+            <div class="project-tags">
+              <span class="project-tag">E-Commerce</span><!-- ✏️ Category -->
+            </div>
+            <div class="project-title" style="font-size:1.6rem">Project Five Title</div><!-- ✏️ Title -->
+          </div>
+          <div class="project-desc" style="max-width:400px">
+            Your feature project — give it more detail. What was the scope,
+            outcome, and impact?<!-- ✏️ Description -->
+          </div>
+          <div class="project-footer" style="border:none;padding:0;min-width:80px">
+            <span class="project-year">2023</span>
+            <div class="project-arrow">↗</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── SERVICES ──────────────────────────────────────────────────── -->
+  <section class="services" id="services">
+    <div class="reveal">
+      <p class="section-label">What I Do</p>
+      <h2>Services</h2>
+    </div>
+    <div class="services-list">
+
+      <!-- ✏️ CUSTOMIZE: Replace service items with your own offerings -->
+      <div class="service-item reveal">
+        <span class="service-num">01</span>
+        <span class="service-name">UI / UX Design</span>
+        <span class="service-desc">Research-driven interfaces that delight users and hit business goals.</span>
+        <div class="service-arrow">↗</div>
+      </div>
+
+      <div class="service-item reveal">
+        <span class="service-num">02</span>
+        <span class="service-name">Web Development</span>
+        <span class="service-desc">Fast, accessible, and beautifully engineered websites and apps.</span>
+        <div class="service-arrow">↗</div>
+      </div>
+
+      <div class="service-item reveal">
+        <span class="service-num">03</span>
+        <span class="service-name">Brand Identity</span>
+        <span class="service-desc">Visual systems that give your brand a distinct, memorable presence.</span>
+        <div class="service-arrow">↗</div>
+      </div>
+
+      <div class="service-item reveal">
+        <span class="service-num">04</span>
+        <span class="service-name">Motion &amp; Animation</span>
+        <span class="service-desc">Micro-interactions and scroll-triggered animations that breathe life into products.</span>
+        <div class="service-arrow">↗</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ────────────────────────────────────────────────────── -->
+  <section class="contact" id="contact">
+    <div class="contact-blob"></div>
+    <p class="section-label reveal">Get In Touch</p>
+    <!-- ✏️ CUSTOMIZE: Your call-to-action headline -->
+    <h2 class="reveal">
+      Let's Build<br/>
+      Something<br/>
+      <em>Great.</em>
+    </h2>
+    <!-- ✏️ CUSTOMIZE: Your email address (both href and visible text) -->
+    <a class="contact-email reveal" href="mailto:olbeseurico@gmail.com">olbeseurico@gmail.com</a>
+
+    <!-- ✏️ CUSTOMIZE: Your social media URLs -->
+    <ul class="social-links reveal">
+      <li><a href="https://www.linkedin.com/in/tyrone-olbes-083513302/" target="_blank">LinkedIn ↗</a></li>
+      <li><a href="https://github.com/Cheems-codes" target="_blank">GitHub ↗</a></li>
+      <li><a href="https://dribbble.com/tyrone-olbes" target="_blank">Dribbble ↗</a></li>
+      <li><a href="https://x.com/EuricoGriffin" target="_blank">Twitter ↗</a></li>
+    </ul>
+  </section>
+
+  <!-- ─── FOOTER ─────────────────────────────────────────────────────── -->
+  <footer>
+    <!-- ✏️ CUSTOMIZE: Your name and year -->
+    <p>© 2025 Tyrone Olbes. All rights reserved.</p>
+    <p>Designed &amp; Built by <strong>Tyrone Olbes</strong></p>
+  </footer>
+
+  <!-- ─── SCRIPTS ────────────────────────────────────────────────────── -->
+  <script>
+    /* ── Custom cursor ── */
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursor-ring');
+    let rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+      // ring lags slightly
+      setTimeout(() => {
+        ring.style.left = e.clientX + 'px';
+        ring.style.top  = e.clientY + 'px';
+      }, 60);
+    });
+
+    document.querySelectorAll('a, button, .project-card, .service-item').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+    });
+
+    /* ── Nav scroll effect ── */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    /* ── Scroll reveal ── */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
