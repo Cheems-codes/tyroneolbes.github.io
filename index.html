@@ -290,7 +290,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
-      align-items: center;
+      align-items: start;
     }
     .about-left h2 {
       font-family: var(--font-head);
@@ -304,6 +304,90 @@
       color: var(--muted);
       max-width: 420px;
       margin-bottom: 16px;
+    }
+
+    /* Education / Affiliations card */
+    .edu-card {
+      margin-top: 32px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .edu-card-header {
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .edu-card-header span {
+      font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--accent);
+    }
+    .edu-card-header::before {
+      content: ''; width: 16px; height: 1px; background: var(--accent);
+    }
+    .edu-entry {
+      padding: 24px 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .edu-entry:last-child { border-bottom: none; }
+    .edu-school {
+      font-family: var(--font-head);
+      font-size: .82rem; font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .edu-degree {
+      font-size: .8rem; color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .edu-year {
+      font-size: .72rem; color: var(--muted); letter-spacing: .04em;
+    }
+
+    /* Affiliations */
+    .aff-card {
+      margin-top: 20px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .aff-card-header {
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .aff-card-header span {
+      font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--accent);
+    }
+    .aff-card-header::before {
+      content: ''; width: 16px; height: 1px; background: var(--accent);
+    }
+    .aff-entry { padding: 24px 28px; }
+    .aff-org {
+      font-family: var(--font-head);
+      font-size: .88rem; font-weight: 700;
+      color: var(--text); margin-bottom: 2px;
+    }
+    .aff-role {
+      font-size: .8rem; color: var(--accent); margin-bottom: 8px;
+    }
+    .aff-year {
+      font-size: .72rem; color: var(--muted); letter-spacing: .04em;
+      margin-bottom: 14px;
+    }
+    .aff-bullets {
+      list-style: none; display: flex; flex-direction: column; gap: 8px;
+    }
+    .aff-bullets li {
+      font-size: .78rem; color: var(--muted); line-height: 1.55;
+      padding-left: 14px; position: relative;
+    }
+    .aff-bullets li::before {
+      content: '✦'; position: absolute; left: 0;
+      color: var(--accent); font-size: .5rem; top: 4px;
     }
 
     .about-right {
@@ -752,17 +836,13 @@
   <section class="about" id="about">
     <div class="about-left reveal">
       <p class="section-label">About Me</p>
-      <!-- ✏️ CUSTOMIZE: Your about heading -->
       <h2>Design with<br/>Purpose &amp;<br/>Precision</h2>
-      <!-- ✏️ CUSTOMIZE: Your bio paragraphs -->
       <p>
         I'm a 20-year-old creative developer and designer based in Manila, PH. I specialize in crafting digital experiences that seamlessly blend bold visual design with precise engineering.
       </p>
       <p>
-        From early-stage startups to established brands, I help teams ship
-        remarkable experiences across web and mobile.
+        From early-stage startups to established brands, I help teams ship remarkable experiences across web and mobile.
       </p>
-      <!-- ✏️ CUSTOMIZE: Your tech stack / skills -->
       <div class="skill-tags">
         <span class="skill-tag">Java</span>
         <span class="skill-tag">C++</span>
@@ -773,15 +853,45 @@
         <span class="skill-tag">PHP</span>
         <span class="skill-tag">Webflow</span>
       </div>
+
+      <!-- EDUCATION CARD -->
+      <div class="edu-card reveal">
+        <div class="edu-card-header"><span>Education</span></div>
+        <div class="edu-entry">
+          <div class="edu-school">Philippine Christian University Manila</div>
+          <div class="edu-degree">Bachelor of Science in Information Technology — Dean's Lister</div>
+          <div class="edu-year">Pedro Gil, Ermita, Manila · Anticipated Graduation: May 2029</div>
+        </div>
+        <div class="edu-entry">
+          <div class="edu-school">Philippine Christian University Manila</div>
+          <div class="edu-degree">Information and Communications Technology — Scholarship Qualifier</div>
+          <div class="edu-year">Pedro Gil, Ermita, Manila · May 2024</div>
+        </div>
+      </div>
+
+      <!-- AFFILIATIONS CARD -->
+      <div class="aff-card reveal">
+        <div class="aff-card-header"><span>Affiliations</span></div>
+        <div class="aff-entry">
+          <div class="aff-org">Junior Philippine Computer Society</div>
+          <div class="aff-role">Auditor</div>
+          <div class="aff-year">2025 – Present</div>
+          <ul class="aff-bullets">
+            <li>Submitted financial reports for each JPCS project to the committee within one week after project completion.</li>
+            <li>Conducted regular audits of the organization's financial records to ensure accuracy and transparency.</li>
+            <li>Provided recommendations to improve financial practices and strengthen internal financial controls.</li>
+            <li>Reported financial discrepancies or concerns to the organization's leadership.</li>
+            <li>Maintained independence and impartiality from financial management processes.</li>
+            <li>Performed additional duties assigned by the President or the JPCS National Board of Directors.</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="about-right reveal">
-      <!-- ✏️ CUSTOMIZE: Replace placeholder with <img src="your-photo.jpg" alt="Your Name"> -->
       <div class="photo-card">
         <img src="me2.JPG" alt="Tyrone Olbes">
       </div>
-
-      <!-- ✏️ CUSTOMIZE: Update numbers to match your actual stats -->
       <div class="stat-grid">
         <div class="stat-cell">
           <div class="num">3rd</div>
