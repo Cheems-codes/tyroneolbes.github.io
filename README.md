@@ -36,6 +36,7 @@ Project Structure
     └── README.md
 
 Sections
+
      Section	Description
      
       • Hero	Full-screen intro with headline and scroll hint
