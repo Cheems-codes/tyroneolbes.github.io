@@ -6,13 +6,21 @@ A dark-themed personal portfolio website built with vanilla HTML, CSS, and JavaS
 
 Features
  • Custom animated cursor with ring follower
+ 
  • Smooth scroll reveal animations on all sections
+ 
  • Marquee skills strip
+ 
  • Responsive layout (mobile + desktop)
+ 
  • Noise overlay and floating blob backgrounds
+ 
  • Project cards with hover effects and clickable links
+ 
  • Education and affiliations section
+ 
  • Contact links (Email, GitHub, LinkedIn, Twitter)
+ 
 
 Tech Stack
  • HTML5
