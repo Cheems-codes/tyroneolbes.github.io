@@ -37,14 +37,14 @@ Project Structure
 
 Sections
 
-     Section	Description
+     Section	      Description
      
-      • Hero	      Full-screen intro with headline and scroll hint
-      • Marquee	      Scrolling skills strip
-      • About	      Bio, skill tags, education, and affiliations
+      • Hero	            Full-screen intro with headline and scroll hint
+      • Marquee	            Scrolling skills strip
+      • About	            Bio, skill tags, education, and affiliations
       • Projects	      Grid of project cards with links
       • Services	      List of services offered
-      • Contact	      Email, GitHub, LinkedIn, Twitter links   
+      • Contact	            Email, GitHub, LinkedIn, Twitter links   
    
 
 Contact
