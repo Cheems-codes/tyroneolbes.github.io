@@ -171,7 +171,7 @@ nav.scrolled {
 
 .hero-title {
   font-family: var(--font-head);
-  font-size: clamp(3.5rem, 9vw, 9rem);
+  font-size: clamp(2.4rem, 9vw, 9rem);
   font-weight: 800;
   line-height: .95;
   letter-spacing: -.03em;
@@ -373,7 +373,7 @@ section { position: relative; z-index: 1; }
 .contact { padding: 120px 48px; text-align: center; position: relative; overflow: hidden; }
 .contact-blob { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: rgba(123,97,255,.12); top: 50%; left: 50%; transform: translate(-50%,-50%); filter: blur(100px); pointer-events: none; }
 .contact .section-label { justify-content: center; }
-.contact h2 { font-family: var(--font-head); font-size: clamp(2.8rem, 7vw, 6.5rem); font-weight: 800; line-height: .95; letter-spacing: -.03em; margin-bottom: 36px; position: relative; }
+.contact h2 { font-family: var(--font-head); font-size: clamp(2rem, 7vw, 6.5rem); font-weight: 800; line-height: .95; letter-spacing: -.03em; margin-bottom: 36px; position: relative; }
 .contact h2 em { font-style: normal; color: var(--accent); }
 .contact-email { display: inline-block; font-size: clamp(1rem, 2vw, 1.3rem); color: var(--muted); text-decoration: none; letter-spacing: .02em; position: relative; transition: color .2s; margin-bottom: 48px; }
 .contact-email::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .3s; }
@@ -531,9 +531,14 @@ footer p { font-size: .78rem; color: var(--muted); }
 }
 
 @media (max-width: 480px) {
-  .hero-title { font-size: clamp(2.6rem, 13vw, 3.5rem); }
-  .about-left h2 { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+  .hero-title { font-size: clamp(2rem, 10vw, 2.8rem); letter-spacing: -.02em; }
+  .hero-bio { font-size: .9rem; }
+  .about-left h2 { font-size: clamp(1.6rem, 7vw, 2rem); }
   .stat-cell .num { font-size: 1.6rem; }
   .project-title { font-size: 1.1rem; }
   .project-desc { font-size: .8rem; }
+  .contact h2 { font-size: clamp(2rem, 10vw, 2.8rem); letter-spacing: -.02em; }
+  .logo { font-size: .9rem; }
+  .logo-mark { width: 28px; height: 28px; font-size: .65rem; }
+  .services h2 { font-size: clamp(1.6rem, 7vw, 2rem); }
 }
