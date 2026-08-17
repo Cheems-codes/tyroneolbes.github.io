@@ -542,3 +542,194 @@ footer p { font-size: .78rem; color: var(--muted); }
   .logo-mark { width: 28px; height: 28px; font-size: .65rem; }
   .services h2 { font-size: clamp(1.6rem, 7vw, 2rem); }
 }
+
+/* ─── CERTIFICATES ───────────────────────────────────────────── */
+.certificates {
+  padding: 80px 48px 120px;
+  border-top: 1px solid var(--border);
+}
+.certificates h2 {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -.025em;
+  line-height: 1.05;
+  margin-bottom: 48px;
+}
+
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.cert-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: border-color .3s, transform .3s;
+  display: flex;
+  flex-direction: column;
+}
+.cert-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+.cert-card:hover .cert-zoom { opacity: 1; }
+.cert-card:hover .cert-img img { transform: scale(1.04); }
+
+.cert-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: #111;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.cert-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+  display: block;
+}
+.cert-img-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+  color: var(--muted); font-size: .8rem;
+  background: linear-gradient(135deg, #111 0%, #1a1a22 100%);
+}
+
+.cert-info {
+  padding: 20px 20px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cert-title {
+  font-family: var(--font-head);
+  font-size: .95rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--text);
+  line-height: 1.3;
+}
+.cert-issuer {
+  font-size: .78rem;
+  color: var(--accent);
+}
+.cert-date {
+  font-size: .72rem;
+  color: var(--muted);
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.cert-zoom {
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 30px; height: 30px;
+  background: rgba(6,6,8,.8);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  display: grid; place-items: center;
+  font-size: .85rem;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+/* ─── LIGHTBOX ───────────────────────────────────────────────── */
+.lightbox {
+  position: fixed; inset: 0;
+  z-index: 500;
+  background: rgba(6,6,8,.92);
+  backdrop-filter: blur(20px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+.lightbox.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 24px; right: 24px;
+  width: 44px; height: 44px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+  display: grid; place-items: center;
+  transition: border-color .2s, color .2s;
+  z-index: 10;
+}
+.lightbox-close:hover { border-color: var(--accent); color: var(--accent); }
+
+.lightbox-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  max-width: 760px;
+  width: 100%;
+  transform: scale(.95);
+  transition: transform .3s ease;
+}
+.lightbox.open .lightbox-inner { transform: scale(1); }
+
+.lightbox-img-wrap {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.lightbox-img-wrap img {
+  width: 100%;
+  display: block;
+  max-height: 70vh;
+  object-fit: contain;
+  background: #111;
+}
+
+.lightbox-details {
+  text-align: center;
+}
+.lightbox-title {
+  font-family: var(--font-head);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  margin-bottom: 8px;
+}
+.lightbox-issuer {
+  font-size: .9rem;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.lightbox-date {
+  font-size: .8rem;
+  color: var(--muted);
+}
+
+/* ─── CERT RESPONSIVE ────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .certificates { padding: 60px 20px 80px; }
+  .cert-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (max-width: 480px) {
+  .cert-grid { grid-template-columns: 1fr; }
+  .lightbox-inner { gap: 16px; }
+  .lightbox-title { font-size: 1rem; }
+}

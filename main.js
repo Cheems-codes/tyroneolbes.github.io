@@ -51,3 +51,34 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.12 });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ── Certificate Lightbox ── */
+function openCert(card) {
+  const img    = card.querySelector('.cert-img img');
+  const title  = card.querySelector('.cert-title').textContent;
+  const issuer = card.querySelector('.cert-issuer').textContent;
+  const date   = card.querySelector('.cert-date').textContent;
+
+  document.getElementById('lightboxImg').src    = img ? img.src : '';
+  document.getElementById('lightboxImg').alt    = title;
+  document.getElementById('lightboxTitle').textContent  = title;
+  document.getElementById('lightboxIssuer').textContent = issuer;
+  document.getElementById('lightboxDate').textContent   = date;
+
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(e) {
+  if (e && e.target !== document.getElementById('lightbox') && !e.target.classList.contains('lightbox-close')) return;
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close with Escape key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});

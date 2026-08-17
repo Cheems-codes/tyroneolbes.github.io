@@ -26,6 +26,7 @@
       <li><a href="#work">Work</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
+      <li><a href="#certificates">Certificates</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a class="nav-cta" href="https://www.linkedin.com/in/tyrone-olbes-083513302/">Hire Me</a>
@@ -39,6 +40,7 @@
     <a href="#work" class="mobile-link">Work</a>
     <a href="#about" class="mobile-link">About</a>
     <a href="#services" class="mobile-link">Services</a>
+    <a href="#certificates" class="mobile-link">Certificates</a>
     <a href="#contact" class="mobile-link">Contact</a>
     <a href="https://www.linkedin.com/in/tyrone-olbes-083513302/" class="mobile-cta" target="_blank">Hire Me</a>
   </div>
@@ -323,6 +325,129 @@
       </div>
     </div>
   </section>
+
+  <!-- ─── CERTIFICATES ──────────────────────────────────────────────── -->
+  <section class="certificates" id="certificates">
+    <div class="reveal">
+      <p class="section-label">Credentials</p>
+      <h2>Certificates</h2>
+    </div>
+
+    <div class="cert-grid">
+
+      <!-- ============================================================
+        CERTIFICATE 1 — Replace src, title, issuer, date
+      ============================================================ -->
+      <div class="cert-card reveal" onclick="openCert(this)">
+        <div class="cert-img">
+          <img src="cert1.jpg" alt="Certificate 1" />
+          <!-- If no image yet, delete the <img> above and use this placeholder:
+          <div class="cert-img-placeholder">
+            <span>Add certificate image</span>
+          </div> -->
+        </div>
+        <div class="cert-info">
+          <div class="cert-title">Certificate Title Here</div>
+          <div class="cert-issuer">Issuer / Platform Name</div>
+          <div class="cert-date">Month Year</div>
+        </div>
+        <div class="cert-zoom">⤢</div>
+      </div>
+
+      <!-- ============================================================
+        CERTIFICATE 2
+      ============================================================ -->
+      <div class="cert-card reveal" onclick="openCert(this)">
+        <div class="cert-img">
+          <img src="cert2.jpg" alt="Certificate 2" />
+        </div>
+        <div class="cert-info">
+          <div class="cert-title">Certificate Title Here</div>
+          <div class="cert-issuer">Issuer / Platform Name</div>
+          <div class="cert-date">Month Year</div>
+        </div>
+        <div class="cert-zoom">⤢</div>
+      </div>
+
+      <!-- ============================================================
+        CERTIFICATE 3
+      ============================================================ -->
+      <div class="cert-card reveal" onclick="openCert(this)">
+        <div class="cert-img">
+          <img src="cert3.jpg" alt="Certificate 3" />
+        </div>
+        <div class="cert-info">
+          <div class="cert-title">Certificate Title Here</div>
+          <div class="cert-issuer">Issuer / Platform Name</div>
+          <div class="cert-date">Month Year</div>
+        </div>
+        <div class="cert-zoom">⤢</div>
+      </div>
+
+      <!-- ============================================================
+        CERTIFICATE 4
+      ============================================================ -->
+      <div class="cert-card reveal" onclick="openCert(this)">
+        <div class="cert-img">
+          <img src="cert4.jpg" alt="Certificate 4" />
+        </div>
+        <div class="cert-info">
+          <div class="cert-title">Certificate Title Here</div>
+          <div class="cert-issuer">Issuer / Platform Name</div>
+          <div class="cert-date">Month Year</div>
+        </div>
+        <div class="cert-zoom">⤢</div>
+      </div>
+
+      <!-- ============================================================
+        CERTIFICATE 5
+      ============================================================ -->
+      <div class="cert-card reveal" onclick="openCert(this)">
+        <div class="cert-img">
+          <img src="cert5.jpg" alt="Certificate 5" />
+        </div>
+        <div class="cert-info">
+          <div class="cert-title">Certificate Title Here</div>
+          <div class="cert-issuer">Issuer / Platform Name</div>
+          <div class="cert-date">Month Year</div>
+        </div>
+        <div class="cert-zoom">⤢</div>
+      </div>
+
+      <!-- ============================================================
+        CERTIFICATE 6
+      ============================================================ -->
+      <div class="cert-card reveal" onclick="openCert(this)">
+        <div class="cert-img">
+          <img src="cert6.jpg" alt="Certificate 6" />
+        </div>
+        <div class="cert-info">
+          <div class="cert-title">Certificate Title Here</div>
+          <div class="cert-issuer">Issuer / Platform Name</div>
+          <div class="cert-date">Month Year</div>
+        </div>
+        <div class="cert-zoom">⤢</div>
+      </div>
+
+      <!-- Add more by copying any cert-card block above -->
+
+    </div>
+  </section>
+
+  <!-- ─── LIGHTBOX ──────────────────────────────────────────────────── -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <div class="lightbox-inner">
+      <div class="lightbox-img-wrap">
+        <img id="lightboxImg" src="" alt="" />
+      </div>
+      <div class="lightbox-details">
+        <div class="lightbox-title" id="lightboxTitle"></div>
+        <div class="lightbox-issuer" id="lightboxIssuer"></div>
+        <div class="lightbox-date" id="lightboxDate"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- ─── CONTACT ────────────────────────────────────────────────────── -->
   <section class="contact" id="contact">
