@@ -82,3 +82,19 @@ document.addEventListener('keydown', e => {
     document.body.style.overflow = '';
   }
 });
+
+/* ── Show More Certificates ── */
+function toggleCerts() {
+  const hidden = document.querySelectorAll('.cert-card.hidden');
+  const btn = document.getElementById('showMoreBtn');
+  const isHidden = hidden[0] && getComputedStyle(hidden[0]).display === 'none';
+
+  hidden.forEach(card => {
+    card.style.display = isHidden ? 'flex' : 'none';
+  });
+
+  btn.classList.toggle('open', isHidden);
+  btn.innerHTML = isHidden
+    ? 'Show Less <span class="btn-icon">↑</span>'
+    : `Show More (${hidden.length}) <span class="btn-icon">↓</span>`;
+}
