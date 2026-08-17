@@ -545,7 +545,7 @@ footer p { font-size: .78rem; color: var(--muted); }
 
 /* ─── CERTIFICATES ───────────────────────────────────────────── */
 .certificates {
-  padding: 80px 48px 120px;
+  padding: 80px 80px 120px;
   border-top: 1px solid var(--border);
 }
 .certificates h2 {
@@ -559,7 +559,7 @@ footer p { font-size: .78rem; color: var(--muted); }
 
 .cert-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 16px;
 }
 
