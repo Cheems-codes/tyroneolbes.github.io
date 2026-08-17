@@ -745,3 +745,38 @@ footer p { font-size: .78rem; color: var(--muted); }
   .lightbox-inner { gap: 16px; }
   .lightbox-title { font-size: 1rem; }
 }
+
+.show-more-wrap {
+  text-align: center;
+  margin-top: 32px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.show-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: none;
+  color: var(--text);
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: .85rem;
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+}
+.show-more-btn:hover { border-color: var(--accent); color: var(--accent); }
+.show-more-btn .btn-icon {
+  width: 20px; height: 20px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: .7rem;
+  transition: transform .3s;
+}
+.show-more-btn.open .btn-icon { transform: rotate(180deg); }
