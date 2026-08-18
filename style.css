@@ -561,8 +561,6 @@ footer p { font-size: .78rem; color: var(--muted); }
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 16px;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .cert-card {
@@ -746,12 +744,16 @@ footer p { font-size: .78rem; color: var(--muted); }
   .lightbox-title { font-size: 1rem; }
 }
 
+/* ─── CERT FADE & SHOW MORE ─────────────────────────────────── */
+.cert-grid-wrap {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .show-more-wrap {
   text-align: center;
   margin-top: 32px;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .show-more-btn {
@@ -780,3 +782,39 @@ footer p { font-size: .78rem; color: var(--muted); }
   transition: transform .3s;
 }
 .show-more-btn.open .btn-icon { transform: rotate(180deg); }
+
+.cert-fade {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+  transition: opacity .4s ease;
+  z-index: 2;
+}
+
+.cert-fade.hidden {
+  opacity: 0;
+}
+
+.cert-card.hidden {
+  display: none;
+}
+
+.cert-card.hiding {
+  animation: certFadeOut .3s ease forwards;
+}
+
+.cert-card.showing {
+  animation: certFadeIn .4s ease forwards;
+}
+
+@keyframes certFadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes certFadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(16px); }
+}

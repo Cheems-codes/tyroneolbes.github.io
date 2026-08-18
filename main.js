@@ -85,16 +85,48 @@ document.addEventListener('keydown', e => {
 
 /* ── Show More Certificates ── */
 function toggleCerts() {
-  const hidden = document.querySelectorAll('.cert-card.hidden');
+  const hiddenCards = document.querySelectorAll('.cert-card.hidden');
   const btn = document.getElementById('showMoreBtn');
-  const isHidden = hidden[0] && getComputedStyle(hidden[0]).display === 'none';
+  const fade = document.getElementById('certFade');
+  const isCollapsed = hiddenCards[0] && getComputedStyle(hiddenCards[0]).display === 'none';
 
-  hidden.forEach(card => {
-    card.style.display = isHidden ? 'flex' : 'none';
-  });
-
-  btn.classList.toggle('open', isHidden);
-  btn.innerHTML = isHidden
-    ? 'Show Less <span class="btn-icon">↑</span>'
-    : `Show More (${hidden.length}) <span class="btn-icon">↓</span>`;
+  if (isCollapsed) {
+    // Show all
+    hiddenCards.forEach((card, i) => {
+      card.style.display = 'flex';
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(16px)';
+      setTimeout(() => {
+        card.style.transition = 'opacity .4s ease, transform .4s ease';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, i * 40);
+    });
+    if (fade) fade.classList.add('hidden');
+    btn.classList.add('open');
+    btn.innerHTML = 'Show Less <span class="btn-icon">↑</span>';
+  } else {
+    // Hide all — animate out then scroll back to section
+    hiddenCards.forEach((card, i) => {
+      card.style.transition = 'opacity .25s ease, transform .25s ease';
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(16px)';
+      setTimeout(() => { card.style.display = 'none'; }, 280);
+    });
+    setTimeout(() => {
+      if (fade) fade.classList.remove('hidden');
+      btn.classList.remove('open');
+      btn.innerHTML = `Show More (${hiddenCards.length}) <span class="btn-icon">↓</span>`;
+      // Smooth scroll back to certificates section
+      document.getElementById('certificates').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  }
 }
+
+// Init: hide all cards after first 5 on page load
+document.addEventListener('DOMContentLoaded', () => {
+  const allCards = document.querySelectorAll('.cert-card');
+  allCards.forEach((card, i) => {
+    if (i >= 5) card.style.display = 'none';
+  });
+});
